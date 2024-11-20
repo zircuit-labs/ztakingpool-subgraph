@@ -1,0 +1,31 @@
+specVersion: 0.0.1
+description: ZtakingPool
+repository: https://github.com/zircuit-labs/zkr-staking
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: ZtakingPool
+    network: {{ network }}
+    source:
+      address: "{{ address }}"
+      abi: ZtakingPool
+      startBlock: {{ startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.6
+      language: wasm/assemblyscript
+      entities:
+        - EventToken
+        - Transfer
+      abis:
+        - name: ZtakingPool
+          file: ./abis/{{ file }}.json
+      eventHandlers:
+        - event: Migrate(indexed uint256,indexed address,address[],address,address,uint256[])
+          handler: handleMigrate
+        - event: Deposit(indexed uint256,indexed address,indexed address,uint256)
+          handler: handleDeposit
+        - event: Withdraw(indexed uint256,indexed address,indexed address,uint256)
+          handler: handleWithdraw
+      file: ./src/mapping.ts

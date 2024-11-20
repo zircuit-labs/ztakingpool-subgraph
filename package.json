@@ -1,0 +1,23 @@
+{
+  "name": "ztakingpool-subgraph",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "prepare:mainnet": "mustache config/mainnet.json subgraph.template.yaml > subgraph.yaml",
+    "prepare:zircuit": "mustache config/zircuit.json subgraph.template.yaml > subgraph.yaml",
+    "deploy:mainnet": "goldsky subgraph deploy ztakingpool-mainnet-subgraph/0.0.1 --path .",
+    "deploy:zircuit": "goldsky subgraph deploy ztakingpool-zircuit-subgraph/0.0.1 --path .",
+    "create-local": "graph create --node http://localhost:8020/ zircuit/ztakingpool",
+    "remove-local": "graph remove --node http://localhost:8020/ zircuit/ztakingpool",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 zircuit/ztakingpool"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.51.0",
+    "@graphprotocol/graph-ts": "0.31.0"
+  },
+  "devDependencies": {
+    "mustache": "^4.0.1"
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
+}

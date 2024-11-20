@@ -1,0 +1,7 @@
+type BalanceChange @entity
+{
+  id:                           ID!
+  user:                         ID!
+  amount:                       BigInt!
+  token:                        ID!
+}
